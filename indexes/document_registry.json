@@ -1,0 +1,26 @@
+[
+  {
+    "doc_id": 0,
+    "filename": "hybrid_sample.pdf",
+    "filepath": "D:\\E\\3.University\\4th year\\2nd semester\\IT4216 - Research Project\\research_implementations\\data\\hybrid_sample.pdf",
+    "page_count": 28,
+    "file_size": 1896483,
+    "ingested_at": 1781594364.0114682
+  },
+  {
+    "doc_id": 1,
+    "filename": "sample.pdf",
+    "filepath": "D:\\E\\3.University\\4th year\\2nd semester\\IT4216 - Research Project\\research_implementations\\data\\sample.pdf",
+    "page_count": 5,
+    "file_size": 229304,
+    "ingested_at": 1781594364.0587585
+  },
+  {
+    "doc_id": 2,
+    "filename": "scanned_sample.pdf",
+    "filepath": "D:\\E\\3.University\\4th year\\2nd semester\\IT4216 - Research Project\\research_implementations\\data\\scanned_sample.pdf",
+    "page_count": 22,
+    "file_size": 3882262,
+    "ingested_at": 1781594364.1401
+  }
+]

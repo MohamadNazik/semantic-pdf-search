@@ -1,0 +1,27 @@
+[
+  {
+    "query_id": "q01",
+    "query_text": "machine learning classification algorithms",
+    "relevant_docs": []
+  },
+  {
+    "query_id": "q02",
+    "query_text": "natural language processing text analysis",
+    "relevant_docs": []
+  },
+  {
+    "query_id": "q03",
+    "query_text": "deep learning neural network architectures",
+    "relevant_docs": []
+  },
+  {
+    "query_id": "q04",
+    "query_text": "information retrieval search systems",
+    "relevant_docs": []
+  },
+  {
+    "query_id": "q05",
+    "query_text": "semantic similarity sentence embeddings",
+    "relevant_docs": []
+  }
+]

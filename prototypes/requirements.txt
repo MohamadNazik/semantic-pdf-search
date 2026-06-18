@@ -1,0 +1,13 @@
+# PDF Text Extraction
+PyMuPDF>=1.23.0
+
+# OCR Extraction
+pytesseract>=0.3.10
+pdf2image>=1.16.3
+Pillow>=10.0.0
+
+# Embedding Model
+sentence-transformers>=2.2.0
+
+# Utilities (usually pre-installed)
+numpy>=1.24.0
