@@ -122,6 +122,13 @@ class SearchEvaluator:
             logger.warning("No queries to evaluate.")
             return {}
 
+        # Warm up the search function to discard PyTorch/initialization latency
+        try:
+            logger.info("Warming up search engine to discard initialization latency...")
+            search_fn("warmup query", 1)
+        except Exception:
+            pass
+
         per_query: List[MetricSet] = []
 
         for q in queries:
@@ -182,14 +189,22 @@ class SearchEvaluator:
         precisions: Dict[int, float] = {}
         recalls:    Dict[int, float] = {}
 
+        # Deduplicate retrieved list while preserving rank order for document-level metrics
+        seen = set()
+        dedup_retrieved = []
+        for r in retrieved:
+            if r not in seen:
+                seen.add(r)
+                dedup_retrieved.append(r)
+
         for k in self.eval_ks:
-            top_k_ret = retrieved[:k]
+            top_k_ret = dedup_retrieved[:k]
             hits       = sum(1 for r in top_k_ret if r in relevant)
             precisions[k] = hits / k if k > 0 else 0.0
             recalls[k]    = hits / len(relevant) if relevant else 0.0
 
         # Average Precision
-        ap = self._average_precision(relevant, retrieved)
+        ap = self._average_precision(relevant, dedup_retrieved)
 
         return MetricSet(
             query_id      = query_id,

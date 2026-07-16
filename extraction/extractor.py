@@ -176,6 +176,10 @@ class HybridExtractor:
     ----------
     min_text_length : int
         Character threshold below which OCR is attempted.
+    min_text_quality : float
+        Minimum ratio of alphanumeric+whitespace characters (0.0–1.0).
+        PyMuPDF output scoring below this is treated as garbled and triggers
+        OCR even when the length threshold is met.
     tesseract_cmd   : str or None
         Explicit path to the Tesseract binary; None uses system PATH.
     ocr_dpi         : int
@@ -187,14 +191,16 @@ class HybridExtractor:
     def __init__(
         self,
         min_text_length: int = 50,
+        min_text_quality: float = 0.6,
         tesseract_cmd: Optional[str] = None,
         ocr_dpi: int = 300,
         ocr_language: str = "eng",
     ):
-        self.min_text_length = min_text_length
-        self.ocr_dpi         = ocr_dpi
-        self.ocr_language    = ocr_language
-        self._ocr_available  = False
+        self.min_text_length  = min_text_length
+        self.min_text_quality = min_text_quality
+        self.ocr_dpi          = ocr_dpi
+        self.ocr_language     = ocr_language
+        self._ocr_available   = False
 
         self._init_ocr(tesseract_cmd)
 
@@ -271,11 +277,17 @@ class HybridExtractor:
     # ── internal extraction ───────────────────────────────────────────────────
 
     def _extract_page(self, doc: fitz.Document, page_index: int) -> PageResult:
-        page      = doc[page_index]
-        page_num  = page_index + 1   # 1-based for display
-        text      = page.get_text("text").strip()
+        page     = doc[page_index]
+        page_num = page_index + 1   # 1-based for display
+        text     = page.get_text("text").strip()
 
-        if len(text) >= self.min_text_length:
+        too_short   = len(text) < self.min_text_length
+        low_quality = (
+            not too_short
+            and self._text_quality(text) < self.min_text_quality
+        )
+
+        if not too_short and not low_quality:
             return PageResult(
                 page_num   = page_num,
                 text       = text,
@@ -284,12 +296,13 @@ class HybridExtractor:
                 used_ocr   = False,
             )
 
-        # Text too short — attempt OCR
+        # Text too short or quality below threshold — attempt OCR
         if not self._ocr_available:
+            method = "pymupdf_short" if too_short else "pymupdf_low_quality"
             return PageResult(
                 page_num   = page_num,
                 text       = text,
-                method     = "pymupdf_short",
+                method     = method,
                 char_count = len(text),
                 used_ocr   = False,
             )
@@ -297,13 +310,32 @@ class HybridExtractor:
         ocr_text = self._ocr_page(doc, page_index)
         final    = ocr_text if ocr_text else text
 
+        if ocr_text:
+            method = "ocr"
+        elif too_short:
+            method = "pymupdf_short"
+        else:
+            method = "pymupdf_low_quality"
+
         return PageResult(
             page_num   = page_num,
             text       = final,
-            method     = "ocr" if ocr_text else "pymupdf_short",
+            method     = method,
             char_count = len(final),
             used_ocr   = bool(ocr_text),
         )
+
+    @staticmethod
+    def _text_quality(text: str) -> float:
+        """
+        Returns the fraction of characters that are alphanumeric or whitespace.
+        Garbled text from corrupt or image-based PDF layers typically scores
+        below 0.6 due to high proportions of symbols and control characters.
+        """
+        if not text:
+            return 0.0
+        printable = sum(1 for c in text if c.isalnum() or c.isspace())
+        return printable / len(text)
 
     def _ocr_page(self, doc: fitz.Document, page_index: int) -> str:
         """Render one page as an image and run Tesseract on it."""

@@ -371,10 +371,11 @@ class SemanticSearchApp:
 
             # ── extraction + preprocessing ────────────────────────────────────
             extractor    = HybridExtractor(
-                min_text_length = config.OCR_MIN_TEXT_LENGTH,
-                tesseract_cmd   = config.TESSERACT_CMD,
-                ocr_dpi         = config.OCR_DPI,
-                ocr_language    = config.OCR_LANGUAGE,
+                min_text_length  = config.OCR_MIN_TEXT_LENGTH,
+                min_text_quality = config.OCR_MIN_TEXT_QUALITY,
+                tesseract_cmd    = config.TESSERACT_CMD,
+                ocr_dpi          = config.OCR_DPI,
+                ocr_language     = config.OCR_LANGUAGE,
             )
             preprocessor = TextPreprocessor(
                 use_chunking  = use_chunking,

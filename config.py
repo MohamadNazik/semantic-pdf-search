@@ -61,6 +61,9 @@ TESSERACT_CMD = None
 
 OCR_DPI      = 300   # Resolution for page→image conversion
 OCR_LANGUAGE = "eng" # Tesseract language pack
+# Minimum ratio of alphanumeric+whitespace characters in PyMuPDF output.
+# Text scoring below this is treated as garbled and triggers OCR fallback.
+OCR_MIN_TEXT_QUALITY = 0.6
 
 # ── Text preprocessing ───────────────────────────────────────────────────────
 USE_CHUNKING   = True   # True = chunk-based embeddings; False = full-document

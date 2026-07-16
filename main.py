@@ -81,10 +81,11 @@ def build_index(
 
     # ── 2. Extraction + preprocessing ─────────────────────────────────────────
     extractor    = HybridExtractor(
-        min_text_length = config.OCR_MIN_TEXT_LENGTH,
-        tesseract_cmd   = config.TESSERACT_CMD,
-        ocr_dpi         = config.OCR_DPI,
-        ocr_language    = config.OCR_LANGUAGE,
+        min_text_length  = config.OCR_MIN_TEXT_LENGTH,
+        min_text_quality = config.OCR_MIN_TEXT_QUALITY,
+        tesseract_cmd    = config.TESSERACT_CMD,
+        ocr_dpi          = config.OCR_DPI,
+        ocr_language     = config.OCR_LANGUAGE,
     )
     preprocessor = TextPreprocessor(
         use_chunking  = use_chunking,
@@ -208,7 +209,7 @@ def _print_results(result: dict):
     print(f"\nQuery : {result['query']}")
     print(f"Model : {result.get('model_key', 'keyword')}")
     print(f"Time  : {result['query_time_ms']} ms")
-    print(f"{'─' * 80}")
+    print(f"{'-' * 80}")
     for hit in result["results"]:
         print(
             f"  [{hit['rank']:>2}]  score={hit['score']:.4f}  "
@@ -270,9 +271,9 @@ def run_evaluate(
 
     # Print summary
     agg = eval_output.get("aggregate", {})
-    print(f"\n{'─'*60}")
+    print(f"\n{'-'*60}")
     print(f"  Model: {model_key}   Type: {search_type}   Top-K: {top_k}")
-    print(f"{'─'*60}")
+    print(f"{'-'*60}")
     for metric, val in agg.items():
         if metric not in ("model", "search_type", "top_k", "num_queries"):
             print(f"  {metric:<25} {val}")

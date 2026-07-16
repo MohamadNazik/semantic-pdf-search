@@ -1,27 +1,435 @@
 [
   {
     "query_id": "q01",
-    "query_text": "machine learning classification algorithms",
-    "relevant_docs": []
+    "query_text": "guidance on safe information sharing between charity organizations and financial backers",
+    "relevant_docs": [
+      "642c5aed3f342a15e2ae287d5350a5735bae9ebc.pdf",
+      "6fb1b50dc88bf6c0bb775bf32a6b678b4a558c69.pdf",
+      "fb8c6201bfd519374fe7aba9648e678df1b4492d.pdf"
+    ]
   },
   {
     "query_id": "q02",
-    "query_text": "natural language processing text analysis",
-    "relevant_docs": []
+    "query_text": "accidental leakage of sensitive files during crisis management and its consequences",
+    "relevant_docs": [
+      "0e21835a42a6df2405496f62647058ff855743c1.pdf",
+      "FN57WLHIT65SCHMVG3K65PZW5PWM5CQ7.pdf",
+      "KA545DH3SDEIKBX5MLR7QZVYWYBKBGLV.pdf"
+    ]
   },
   {
     "query_id": "q03",
-    "query_text": "deep learning neural network architectures",
-    "relevant_docs": []
+    "query_text": "rules for processing personal data of vulnerable populations in conflict zones",
+    "relevant_docs": [
+      "536b64435024c919d6b4c3f5819a889d0607f349.pdf",
+      "380cadf4f7caa0146071865cce258e9aaabac440.pdf"
+    ]
   },
   {
     "query_id": "q04",
-    "query_text": "information retrieval search systems",
-    "relevant_docs": []
+    "query_text": "sharing of telemetry and financial transactions in humanitarian operations",
+    "relevant_docs": [
+      "fb8c6201bfd519374fe7aba9648e678df1b4492d.pdf",
+      "ELS4P7L7AQO4WFSJVMCLQZ4HLOQIHFZU.pdf",
+      "7AUNHNHEJ5WZYXSDOPHTM3UHLGVPSSX6.pdf"
+    ]
   },
   {
     "query_id": "q05",
-    "query_text": "semantic similarity sentence embeddings",
-    "relevant_docs": []
+    "query_text": "best practices for deleting or archiving sensitive project records",
+    "relevant_docs": [
+      "CEANMN5G6I4ISNFSTYEX44YCLQ52GWCV.pdf",
+      "5WEKPBBWFKF47XDYW5QBC36KFVBYJFE5.pdf",
+      "f0bc73188fde87a3edf63b71304711ef70314e19.pdf"
+    ]
+  },
+  {
+    "query_id": "q06",
+    "query_text": "risk assessment frameworks for humanitarian data exchange platforms",
+    "relevant_docs": [
+      "d5b25fe1a9b3ab5d54dfc8855984d7a7bb669878.pdf",
+      "76884526812b71751da20a1072d81c012ec88486.pdf",
+      "7595be6b415543e53ed0cb08ce66dfa5dfb7ec0f.pdf"
+    ]
+  },
+  {
+    "query_id": "q07",
+    "query_text": "definition of data incident and harm to affected communities",
+    "relevant_docs": [
+      "0e21835a42a6df2405496f62647058ff855743c1.pdf",
+      "380cadf4f7caa0146071865cce258e9aaabac440.pdf",
+      "76884526812b71751da20a1072d81c012ec88486.pdf"
+    ]
+  },
+  {
+    "query_id": "q08",
+    "query_text": "handling sensitive non-personal data in humanitarian operations",
+    "relevant_docs": [
+      "08036c5a50a93da84c5c45ba468c58159d75281e.pdf",
+      "76884526812b71751da20a1072d81c012ec88486.pdf",
+      "fb8c6201bfd519374fe7aba9648e678df1b4492d.pdf"
+    ]
+  },
+  {
+    "query_id": "q09",
+    "query_text": "role of cash and voucher assistance in covid pandemic response",
+    "relevant_docs": [
+      "fb8c6201bfd519374fe7aba9648e678df1b4492d.pdf",
+      "12851f0053449570257ff3dfe552621a8dd63d53.pdf",
+      "b705ad3e556b7f152b8ada00da4cb55994262d76.pdf"
+    ]
+  },
+  {
+    "query_id": "q10",
+    "query_text": "data responsibility guidelines for ocha offices and field staff",
+    "relevant_docs": [
+      "642c5aed3f342a15e2ae287d5350a5735bae9ebc.pdf",
+      "380cadf4f7caa0146071865cce258e9aaabac440.pdf",
+      "6fb1b50dc88bf6c0bb775bf32a6b678b4a558c69.pdf"
+    ]
+  },
+  {
+    "query_id": "q11",
+    "query_text": "methods to calculate the number of people affected by natural disasters in East Africa",
+    "relevant_docs": [
+      "814f9f98c59d2d3fcdd3650f2f4c15ca526274cf.pdf",
+      "c386176749094cb9a148745186bf6a52c2e167ca.pdf",
+      "0a29925ccc5e6299e132a73325956a3abef6dd26.pdf"
+    ]
+  },
+  {
+    "query_id": "q12",
+    "query_text": "population exposure modeling for river floods in Somalia",
+    "relevant_docs": [
+      "0a29925ccc5e6299e132a73325956a3abef6dd26.pdf",
+      "201ab28823c4a10ca391e800642e9cf381737ed2.pdf",
+      "5f1daaa6087c0d2d803b23997270dc8d79a1eb40.pdf"
+    ]
+  },
+  {
+    "query_id": "q13",
+    "query_text": "technical notes on rainfall trends and weather forecasts in disaster zones",
+    "relevant_docs": [
+      "281928eff64137efdd144a833c81ad0ee45284c1.pdf",
+      "62385983da48ed17e440fb89bcf0e436630b8d6f.pdf",
+      "49833f5cf0647c2295e3b3bf11a68ec47a813414.pdf"
+    ]
+  },
+  {
+    "query_id": "q14",
+    "query_text": "flood alert trigger mechanisms for anticipatory humanitarian funding",
+    "relevant_docs": [
+      "NG33GO534UD2QX6Z7DBE7KHLGNGIEU4R.pdf",
+      "11613a97cef51ad28635fdd86915e74d94cff227.pdf",
+      "6a72e705ce8cec9c77d24212eed6962d99a2883d.pdf"
+    ]
+  },
+  {
+    "query_id": "q15",
+    "query_text": "assessing damage to infrastructure and agricultural lands from seasonal flooding",
+    "relevant_docs": [
+      "E3XL5U27WEMN6KDITFQEPNYN3FFPZRHE.pdf",
+      "WFCTUKBZ537FMIPUCKU643UQRD6XTOHO.pdf"
+    ]
+  },
+  {
+    "query_id": "q16",
+    "query_text": "historical analysis of river water levels and embankment breaches",
+    "relevant_docs": [
+      "0e21835a42a6df2405496f62647058ff855743c1.pdf",
+      "380cadf4f7caa0146071865cce258e9aaabac440.pdf",
+      "719954f8de432dbfef6253fd5bfaad07dc44e103.pdf"
+    ]
+  },
+  {
+    "query_id": "q17",
+    "query_text": "tools for real-time reporting of active flood zones and evacuation routes",
+    "relevant_docs": [
+      "5M56W5BE4HY6J3WK2TN3HZJ6N3ZMYTJ4.pdf",
+      "JKMMWI4FZT47DVLEJX3E2MIT3BNH3PTY.pdf"
+    ]
+  },
+  {
+    "query_id": "q18",
+    "query_text": "measuring population displacement and migration patterns during heavy droughts",
+    "relevant_docs": [
+      "7096e75ab6e07bb7950205a526f70af2024a802a.pdf",
+      "17815074de3c9f8af9a5051978a72e2a83f1d18d.pdf",
+      "1e8c2332a461a3a142840fa477fa907c66c35dac.pdf"
+    ]
+  },
+  {
+    "query_id": "q19",
+    "query_text": "climate change adaptation and resilience strategies in arid regions",
+    "relevant_docs": [
+      "P27OC5LB5CYK7PNMUUFAMXEQ3THDTNJ4.pdf",
+      "2c143c1675c174d0317c3a1f67b68b2b60047467.pdf",
+      "2RE7KOL5KV5FFCUG6CYUVEFF4KIUZN2V.pdf"
+    ]
+  },
+  {
+    "query_id": "q20",
+    "query_text": "soil erosion and land degradation assessment in flood-prone basins",
+    "relevant_docs": [
+      "MZRWQI7HD6SSDT2AQTG7FN73WTASIU6X.pdf",
+      "AOZ2LBQOYCC5F3KFBN3FUGN2FODM6DCU.pdf",
+      "2WE4HZPD57KVPL4RQKCB4PUG42SQ2RMJ.pdf"
+    ]
+  },
+  {
+    "query_id": "q21",
+    "query_text": "standards for evaluating forecasting algorithms used in relief operations",
+    "relevant_docs": [
+      "7bee00906c1ce0a45940a9381fe32dd0d79cfd93.pdf",
+      "af754bdf786579eb81414d411ef7c19f4e62ace6.pdf",
+      "7096e75ab6e07bb7950205a526f70af2024a802a.pdf"
+    ]
+  },
+  {
+    "query_id": "q22",
+    "query_text": "peer review framework for predictive models in humanitarian response",
+    "relevant_docs": [
+      "af754bdf786579eb81414d411ef7c19f4e62ace6.pdf",
+      "7bee00906c1ce0a45940a9381fe32dd0d79cfd93.pdf",
+      "7096e75ab6e07bb7950205a526f70af2024a802a.pdf"
+    ]
+  },
+  {
+    "query_id": "q23",
+    "query_text": "cholera outbreak prediction and early warning systems using environmental data",
+    "relevant_docs": [
+      "6REZDVWAZINCN3EC63464SLUVI2QJHJW.pdf",
+      "74e685ae7e7ff7d88ce66cc6cb6ba62d54c2300a.pdf",
+      "7bee00906c1ce0a45940a9381fe32dd0d79cfd93.pdf"
+    ]
+  },
+  {
+    "query_id": "q24",
+    "query_text": "food insecurity forecasting and crop yield models in sub-Saharan Africa",
+    "relevant_docs": [
+      "1e8c2332a461a3a142840fa477fa907c66c35dac.pdf",
+      "fb8bb0cefab7494ca8c56a4b5b332922e404e465.pdf",
+      "42727bc0ea22235a316e371df59c49011ef2a328.pdf"
+    ]
+  },
+  {
+    "query_id": "q25",
+    "query_text": "displacement prediction models based on conflict intensity and economic indicators",
+    "relevant_docs": [
+      "11613a97cef51ad28635fdd86915e74d94cff227.pdf",
+      "6a72e705ce8cec9c77d24212eed6962d99a2883d.pdf",
+      "af754bdf786579eb81414d411ef7c19f4e62ace6.pdf"
+    ]
+  },
+  {
+    "query_id": "q26",
+    "query_text": "model cards and documentation templates for machine learning in humanitarian sectors",
+    "relevant_docs": [
+      "fb8bb0cefab7494ca8c56a4b5b332922e404e465.pdf",
+      "7096e75ab6e07bb7950205a526f70af2024a802a.pdf",
+      "f55a8d69c6047f9037f79225c367766987e25f2b.pdf"
+    ]
+  },
+  {
+    "query_id": "q27",
+    "query_text": "technical specifications of Bucky Covid-19 projection model",
+    "relevant_docs": [
+      "fb8bb0cefab7494ca8c56a4b5b332922e404e465.pdf",
+      "74e685ae7e7ff7d88ce66cc6cb6ba62d54c2300a.pdf",
+      "FKGR2WSW2JVE5A3UJMB3CDZANY52D52I.pdf"
+    ]
+  },
+  {
+    "query_id": "q28",
+    "query_text": "foresight models for anticipating conflict-related humanitarian needs",
+    "relevant_docs": [
+      "814f9f98c59d2d3fcdd3650f2f4c15ca526274cf.pdf"
+    ]
+  },
+  {
+    "query_id": "q29",
+    "query_text": "regression models and statistical calibration techniques for predictive systems",
+    "relevant_docs": [
+      "GIG4KPPQWOAJKUY3724CODP2WSX5I2GF.pdf",
+      "EUMZHAVVHG7K6CDQVOACCW3IN4DSMT5M.pdf",
+      "JX4QV4DIXVXTDI737KSBDD7U3WHIGNWL.pdf"
+    ]
+  },
+  {
+    "query_id": "q30",
+    "query_text": "validation guidelines for machine learning algorithms in crisis response",
+    "relevant_docs": [
+      "08036c5a50a93da84c5c45ba468c58159d75281e.pdf"
+    ]
+  },
+  {
+    "query_id": "q31",
+    "query_text": "standards for verifying the integrity and correctness of uploaded files on public platforms",
+    "relevant_docs": [
+      "9a88dbee11432f3b74011df8eeab1943959dbb20.pdf",
+      "4UCZ4AEHAQQE2MYSFOGR6GRRPKNIAFCW.pdf",
+      "DROYHKJATHTGQRNXG6PEDVKVXILMNNET.pdf"
+    ]
+  },
+  {
+    "query_id": "q32",
+    "query_text": "GIS mapping and spatial coordination of logistics in active crisis zones",
+    "relevant_docs": [
+      "Z42OE7PSGVKK54B3J2LWZ4THMYJIJHGJ.pdf",
+      "7ID44TA4ZPWEYUNNLNWPGUFJWDYENEDY.pdf",
+      "6C4F5OS4HOEBDQEKSVUX42XOMOJG3BNW.pdf"
+    ]
+  },
+  {
+    "query_id": "q33",
+    "query_text": "dataset quality assurance QA checklists for public repository contributors",
+    "relevant_docs": [
+      "9a88dbee11432f3b74011df8eeab1943959dbb20.pdf",
+      "45W73IZ4UHYYGASU2Y4JO6Q7SC56OPTI.pdf",
+      "e42ff10674f4d5964879848ad96abe31cb6b1ebf.pdf"
+    ]
+  },
+  {
+    "query_id": "q34",
+    "query_text": "coordination of metadata standards and interoperability in humanitarian databases",
+    "relevant_docs": [
+      "aa9edb6b15f25884ea1d47308c271fbf5badd29d.pdf",
+      "536b64435024c919d6b4c3f5819a889d0607f349.pdf",
+      "RI2EFC7G35NUUXG5XEXZL7S2JTPG25NY.pdf"
+    ]
+  },
+  {
+    "query_id": "q35",
+    "query_text": "satellite imagery analysis for monitoring damage in urban conflict areas",
+    "relevant_docs": [
+      "281928eff64137efdd144a833c81ad0ee45284c1.pdf"
+    ]
+  },
+  {
+    "query_id": "q36",
+    "query_text": "mobile data collection tools and offline mapping applications for field surveys",
+    "relevant_docs": [
+      "ROFAK5ST6GGKDWOVZ4YC6QI5GYOJBO4I.pdf",
+      "7IYBO6EFOFMF4ETCCIZYJEGPTBQY3EE5.pdf",
+      "HTWW3AUIV4LKXIRLIDXBWQG76WEUG26H.pdf"
+    ]
+  },
+  {
+    "query_id": "q37",
+    "query_text": "database schema design for registering internally displaced persons",
+    "relevant_docs": [
+      "08036c5a50a93da84c5c45ba468c58159d75281e.pdf"
+    ]
+  },
+  {
+    "query_id": "q38",
+    "query_text": "spatial interpolation techniques for mapping groundwater contamination in refugee camps",
+    "relevant_docs": [
+      "08036c5a50a93da84c5c45ba468c58159d75281e.pdf"
+    ]
+  },
+  {
+    "query_id": "q39",
+    "query_text": "guidelines for public release of geocoded data without violating privacy",
+    "relevant_docs": [
+      "R77SNILPJ5SSKNRBECOMST54VSPJ3RVT.pdf",
+      "CZOP2ITFIK5GAH4SD3GJI755X7QFUHM3.pdf",
+      "SA3EKMNRN4KHJYVMDDBOUIQTZIV3ZVJH.pdf"
+    ]
+  },
+  {
+    "query_id": "q40",
+    "query_text": "open data platforms and APIs for sharing humanitarian statistics",
+    "relevant_docs": [
+      "b4eb68dd1d92f8c56b25e6d52948ba6c8ca8ec83.pdf",
+      "6RZXET5EGN7QMGM5PROIXJI447YTCETZ.pdf",
+      "AEDZUJF6HFEQUC3GZMVSC5EVDPBEJ7TF.pdf"
+    ]
+  },
+  {
+    "query_id": "q41",
+    "query_text": "response plans for addressing acute food shortages and malnutrition in East Africa",
+    "relevant_docs": [
+      "5f1daaa6087c0d2d803b23997270dc8d79a1eb40.pdf",
+      "879ec9e7fed8f827f29acd1f83f3bb75e002360f.pdf",
+      "0a29925ccc5e6299e132a73325956a3abef6dd26.pdf"
+    ]
+  },
+  {
+    "query_id": "q42",
+    "query_text": "distribution guidelines for non-food items in emergency camps",
+    "relevant_docs": [
+      "12851f0053449570257ff3dfe552621a8dd63d53.pdf",
+      "1e8c2332a461a3a142840fa477fa907c66c35dac.pdf",
+      "2c143c1675c174d0317c3a1f67b68b2b60047467.pdf"
+    ]
+  },
+  {
+    "query_id": "q43",
+    "query_text": "emergency wash water sanitation hygiene interventions in cholera-prone areas",
+    "relevant_docs": [
+      "4NULTK4K27CEH4E6TCVCEHXAWVJJMWSX.pdf",
+      "3PILGMQ4BBDRSLAPZCPVAHBNX53K2NUJ.pdf",
+      "BLPT55AK2Y5UAQGF36X5OMVOO6APKWVI.pdf"
+    ]
+  },
+  {
+    "query_id": "q44",
+    "query_text": "strategic plans and funding requirements for national humanitarian needs",
+    "relevant_docs": [
+      "0a29925ccc5e6299e132a73325956a3abef6dd26.pdf"
+    ]
+  },
+  {
+    "query_id": "q45",
+    "query_text": "coordination structures between international NGOs and local civil societies",
+    "relevant_docs": [
+      "fb8c6201bfd519374fe7aba9648e678df1b4492d.pdf"
+    ]
+  },
+  {
+    "query_id": "q46",
+    "query_text": "mobile clinic deployment strategies for hard-to-reach conflict areas",
+    "relevant_docs": [
+      "3EG2SKQ4OJ5RGGAPXC4LPRAYJJJNH2XO.pdf",
+      "KHFVIIN7BUD6WPBAO3FNRJXTCS5FVIOK.pdf",
+      "OE6BMOWZLGKSJUHP5BN2KHW6DEYTYGUZ.pdf"
+    ]
+  },
+  {
+    "query_id": "q47",
+    "query_text": "monitoring and evaluation indicators for emergency shelter programs",
+    "relevant_docs": [
+      "UKNH3OQ2LY6SZKEQ7ITIOEHER4BHZEEN.pdf",
+      "3OHZBJVNLM4IAL6GLY3AKUQIVCNLPJLO.pdf",
+      "C5BRNMXYO6ZXRPUZUNHID4EBW4TAKQYI.pdf"
+    ]
+  },
+  {
+    "query_id": "q48",
+    "query_text": "logistics and supply chain optimization for shipping medical supplies",
+    "relevant_docs": [
+      "P7BCU2OYC6JMB6JKYILFFYNACDO4MAXG.pdf",
+      "IWBFGFBEXBD54JGRHBZM5V2BUAZTRO4R.pdf",
+      "7ID44TA4ZPWEYUNNLNWPGUFJWDYENEDY.pdf"
+    ]
+  },
+  {
+    "query_id": "q49",
+    "query_text": "education in emergencies program guidelines for displaced children",
+    "relevant_docs": [
+      "X523GQMQOO6J2IFJ534QO3V3HYITF7XF.pdf",
+      "2544CYX3TC3T5QB2NTVXD3IUFM654GXK.pdf",
+      "5WEKPBBWFKF47XDYW5QBC36KFVBYJFE5.pdf"
+    ]
+  },
+  {
+    "query_id": "q50",
+    "query_text": "gender-based violence prevention and protection policies in emergency shelters",
+    "relevant_docs": [
+      "AA7LE5CV3O4PNQJPJXH2W6ML2O44A2ET.pdf",
+      "X5LYOK62EFBFVPNGADYEJUVEZJTZDHMC.pdf",
+      "KHFVIIN7BUD6WPBAO3FNRJXTCS5FVIOK.pdf"
+    ]
   }
 ]
