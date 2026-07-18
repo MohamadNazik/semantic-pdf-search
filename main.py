@@ -99,13 +99,23 @@ def build_index(
     total_extract_time = 0.0
 
     for doc_entry in registry:
-        logger.info("Extracting: %s", doc_entry["filename"])
-        try:
-            ext_result = extractor.extract_document(doc_entry["filepath"])
-            total_extract_time += ext_result["extraction_time"]
-        except Exception as exc:
-            logger.error("Skipping %s: %s", doc_entry["filename"], exc)
-            continue
+        doc_id = doc_entry["doc_id"]
+        cached_text = registry.get_extracted_text(doc_id)
+        if cached_text:
+            logger.info("Retrieved cached text for: %s", doc_entry["filename"])
+            ext_result = {
+                "full_text": cached_text,
+                "extraction_time": 0.0
+            }
+        else:
+            logger.info("Extracting: %s", doc_entry["filename"])
+            try:
+                ext_result = extractor.extract_document(doc_entry["filepath"])
+                registry.update_extracted_text(doc_id, ext_result["full_text"])
+                total_extract_time += ext_result["extraction_time"]
+            except Exception as exc:
+                logger.error("Skipping %s: %s", doc_entry["filename"], exc)
+                continue
 
         chunks = preprocessor.process(ext_result["full_text"], doc_entry["doc_id"])
         for chunk in chunks:

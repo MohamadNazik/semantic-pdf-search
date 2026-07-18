@@ -13,6 +13,7 @@ HybridExtractor   : extracts text per-page with PyMuPDF, falling back to
 import io
 import json
 import logging
+import sqlite3
 import time
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -26,94 +27,142 @@ logger = logging.getLogger(__name__)
 
 class DocumentRegistry:
     """
-    Maintains a persistent JSON registry of all ingested PDF documents.
+    Maintains a persistent SQLite database registry of all ingested PDF documents.
+    Caches extracted text to speed up subsequent indexing runs and prevent redundant OCR.
 
     Each entry stores:
-        doc_id      — zero-based integer index
-        filename    — basename of the file
-        filepath    — absolute path
-        page_count  — number of pages
-        file_size   — bytes
-        ingested_at — Unix timestamp
+        doc_id          — primary key integer
+        filename        — basename of the file
+        filepath        — absolute path
+        page_count      — number of pages
+        file_size       — bytes
+        ingested_at     — Unix timestamp
+        extracted_text  — full text (cached)
     """
 
     def __init__(self, registry_path: Path):
         self.registry_path = Path(registry_path)
         self.documents: List[Dict] = []
+        self.registry_path.parent.mkdir(parents=True, exist_ok=True)
+        self.conn = sqlite3.connect(str(self.registry_path), check_same_thread=False)
         self._load()
 
-    # ── persistence ──────────────────────────────────────────────────────────
-
     def _load(self):
-        if self.registry_path.exists():
-            try:
-                with open(self.registry_path, "r", encoding="utf-8") as f:
-                    self.documents = json.load(f)
-                logger.info(
-                    "Loaded registry with %d document(s) from %s",
-                    len(self.documents), self.registry_path,
-                )
-            except (json.JSONDecodeError, IOError) as exc:
-                logger.warning("Could not load registry (%s); starting fresh.", exc)
-                self.documents = []
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS documents (
+                doc_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                filename TEXT,
+                filepath TEXT UNIQUE,
+                page_count INTEGER,
+                file_size INTEGER,
+                ingested_at REAL,
+                extracted_text TEXT
+            )
+        """)
+        self.conn.commit()
 
-    def save(self):
-        self.registry_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(self.registry_path, "w", encoding="utf-8") as f:
-            json.dump(self.documents, f, indent=2)
-        logger.debug("Registry saved (%d entries).", len(self.documents))
-
-    # ── scan ─────────────────────────────────────────────────────────────────
+        # Load metadata into self.documents for iteration and retrieval
+        cursor.execute("""
+            SELECT doc_id, filename, filepath, page_count, file_size, ingested_at 
+            FROM documents ORDER BY doc_id
+        """)
+        self.documents = []
+        for row in cursor.fetchall():
+            self.documents.append({
+                "doc_id":      row[0],
+                "filename":    row[1],
+                "filepath":    row[2],
+                "page_count":  row[3],
+                "file_size":   row[4],
+                "ingested_at": row[5]
+            })
+        logger.info(
+            "Loaded registry with %d document(s) from SQLite db %s",
+            len(self.documents), self.registry_path.name
+        )
 
     def scan_folder(self, folder: Path, reset: bool = False) -> List[Dict]:
         """
-        Walk *folder* recursively and register every PDF found.
-
-        Parameters
-        ----------
-        folder  : directory to scan
-        reset   : if True, discard existing registry entries before scanning
-
-        Returns
-        -------
-        list of newly added document dicts
+        Walk *folder* recursively and register every PDF found in SQLite.
+        Preserves cached text for existing files to speed up comparison runs.
+        If reset=True, all existing entries are cleared before scanning.
         """
         folder = Path(folder)
         if not folder.is_dir():
             raise ValueError(f"Not a directory: {folder}")
 
-        if reset:
-            self.documents = []
+        cursor = self.conn.cursor()
 
-        existing_paths = {d["filepath"] for d in self.documents}
+        if reset:
+            cursor.execute("DELETE FROM documents")
+            self.conn.commit()
+            self.documents = []
+            logger.info("Registry reset — all entries cleared.")
+
+        current_pdfs = sorted(folder.rglob("*.pdf"))
+        found_paths = set()
         new_docs = []
 
-        for pdf_path in sorted(folder.rglob("*.pdf")):
+        for pdf_path in current_pdfs:
             abs_path = str(pdf_path.resolve())
-            if abs_path in existing_paths:
-                continue
+            found_paths.add(abs_path)
 
-            page_count = self._get_page_count(pdf_path)
-            doc_entry = {
-                "doc_id":      len(self.documents),
-                "filename":    pdf_path.name,
-                "filepath":    abs_path,
-                "page_count":  page_count,
-                "file_size":   pdf_path.stat().st_size,
-                "ingested_at": time.time(),
-            }
-            self.documents.append(doc_entry)
-            new_docs.append(doc_entry)
-            logger.debug("Registered: %s (%d pages)", pdf_path.name, page_count)
+            # Check if file is already registered
+            cursor.execute(
+                "SELECT doc_id, file_size FROM documents WHERE filepath = ?",
+                (abs_path,)
+            )
+            row = cursor.fetchone()
 
-        self.save()
-        logger.info(
-            "Scan complete — %d new PDF(s) registered; total: %d",
-            len(new_docs), len(self.documents),
-        )
+            if row is not None:
+                doc_id, old_size = row
+                # If size has changed, update metadata and reset cache
+                if old_size != pdf_path.stat().st_size:
+                    page_count = self._get_page_count(pdf_path)
+                    cursor.execute("""
+                        UPDATE documents 
+                        SET file_size = ?, page_count = ?, extracted_text = NULL 
+                        WHERE doc_id = ?
+                    """, (pdf_path.stat().st_size, page_count, doc_id))
+            else:
+                # Add new entry
+                page_count = self._get_page_count(pdf_path)
+                cursor.execute("""
+                    INSERT INTO documents 
+                    (filename, filepath, page_count, file_size, ingested_at, extracted_text) 
+                    VALUES (?, ?, ?, ?, ?, NULL)
+                """, (pdf_path.name, abs_path, page_count, pdf_path.stat().st_size, time.time()))
+                new_docs.append({
+                    "filename": pdf_path.name,
+                    "filepath": abs_path,
+                    "page_count": page_count,
+                    "file_size": pdf_path.stat().st_size
+                })
+        self.conn.commit()
+
+        # Delete entries of files that were removed from the folder
+        cursor.execute("SELECT doc_id, filepath FROM documents")
+        db_rows = cursor.fetchall()
+        for doc_id, filepath in db_rows:
+            if filepath not in found_paths:
+                cursor.execute("DELETE FROM documents WHERE doc_id = ?", (doc_id,))
+        self.conn.commit()
+
+        # Reload documents
+        self._load()
         return new_docs
 
-    # ── helpers ───────────────────────────────────────────────────────────────
+    def get_extracted_text(self, doc_id: int) -> Optional[str]:
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT extracted_text FROM documents WHERE doc_id = ?", (doc_id,))
+        row = cursor.fetchone()
+        return row[0] if row else None
+
+    def update_extracted_text(self, doc_id: int, text: str):
+        cursor = self.conn.cursor()
+        cursor.execute("UPDATE documents SET extracted_text = ? WHERE doc_id = ?", (text, doc_id))
+        self.conn.commit()
 
     @staticmethod
     def _get_page_count(pdf_path: Path) -> int:
@@ -131,6 +180,9 @@ class DocumentRegistry:
             if doc["doc_id"] == doc_id:
                 return doc
         return None
+
+    def close(self):
+        self.conn.close()
 
     def __len__(self):
         return len(self.documents)

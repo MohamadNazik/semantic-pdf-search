@@ -392,15 +392,26 @@ class SemanticSearchApp:
             doc_texts:   list = []   # for keyword index
 
             for doc_entry in registry:
-                self._refresh_status(
-                    f"Extracting: {doc_entry['filename']}"
-                )
-                try:
-                    ext_result = extractor.extract_document(doc_entry["filepath"])
-                except Exception as exc:
-                    logger.error("Extraction failed for %s: %s",
-                                 doc_entry["filename"], exc)
-                    continue
+                doc_id = doc_entry["doc_id"]
+                cached_text = registry.get_extracted_text(doc_id)
+                if cached_text:
+                    self._refresh_status(
+                        f"Retrieved cached text for: {doc_entry['filename']}"
+                    )
+                    ext_result = {
+                        "full_text": cached_text
+                    }
+                else:
+                    self._refresh_status(
+                        f"Extracting: {doc_entry['filename']}"
+                    )
+                    try:
+                        ext_result = extractor.extract_document(doc_entry["filepath"])
+                        registry.update_extracted_text(doc_id, ext_result["full_text"])
+                    except Exception as exc:
+                        logger.error("Extraction failed for %s: %s",
+                                     doc_entry["filename"], exc)
+                        continue
 
                 chunks = preprocessor.process(
                     ext_result["full_text"], doc_entry["doc_id"]

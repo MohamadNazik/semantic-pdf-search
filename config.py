@@ -23,7 +23,7 @@ for _d in [DATA_DIR, MODELS_DIR, INDEXES_DIR, RESULTS_DIR, LOGS_DIR]:
     _d.mkdir(parents=True, exist_ok=True)
 
 # ── Document registry ────────────────────────────────────────────────────────
-REGISTRY_FILE = BASE_DIR / "indexes" / "document_registry.json"
+REGISTRY_FILE = BASE_DIR / "indexes" / "document_registry.db"
 
 # ── Embedding models ─────────────────────────────────────────────────────────
 EMBEDDING_MODELS = {
